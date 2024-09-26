@@ -20,7 +20,7 @@ export default function Task({
   actionLabel = 'Complete'
 }: TaskProps) {
   return (
-    <div className="bg-white border border-gray-200 p-4 rounded-lg flex justify-between items-center">
+    <div key={id} className="bg-white border border-gray-200 p-4 rounded-lg flex justify-between items-center">
       <div>
         <h3 className="font-semibold">{title}</h3>
         <p className="text-sm text-gray-500">{points} Point</p>

@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Task from './Task'
 
+import riseCoin from '@/assets/rise-coin.png'
+
 export default function MissionScreen({ totalPoints, updatePoints }: { totalPoints: number, updatePoints: (points: number) => void }) {
   const [completedTasks, setCompletedTasks] = useState<string[]>([])
 
@@ -25,7 +27,7 @@ export default function MissionScreen({ totalPoints, updatePoints }: { totalPoin
       <div className="bg-gray-100 p-4 rounded-lg">
         <h2 className="text-xl font-bold mb-2">Mission Point</h2>
         <div className="flex items-center">
-        <Image src={require("@/assets/rise-coin.png")} alt="Coin" width={20} height={20} className="w-6 h-6 mr-2" />
+        <Image src={riseCoin} alt="Coin" width={20} height={20} className="w-6 h-6 mr-2" />
           <span className="text-2xl font-bold">{totalPoints} SP</span>
         </div>
       </div>

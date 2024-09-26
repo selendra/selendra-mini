@@ -2,6 +2,10 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { User } from 'lucide-react'
 
+// Import your image assets using ES6 imports
+import bannerAirdrop from '@/assets/banner-airdrop.png'
+import riseCoin from '@/assets/rise-coin.png'
+
 export default function MainScreen({ totalPoints }: { totalPoints: number }) {
   return (
     <motion.div
@@ -11,7 +15,8 @@ export default function MainScreen({ totalPoints }: { totalPoints: number }) {
       className="p-4 space-y-4"
     >
       <div className="bg-primary/50 p-4 rounded-lg">
-        <Image src={require("@/assets/banner-airdrop.png")} alt="Selendra Airdrop" width={200} height={100} className="w-full mb-4" />
+        {/* Use the imported images */}
+        <Image src={bannerAirdrop} alt="Selendra Airdrop" width={200} height={100} className="w-full mb-4" />
         <h2 className="text-xl font-bold mb-2 text-white">Invite Friends with Selendra mini & Earn SEL</h2>
         <p className="text-sm text-white">Invite more friends to earn more SEL</p>
         <p className="text-sm text-white">2024.08.23 - 09.30</p>
@@ -33,7 +38,8 @@ export default function MainScreen({ totalPoints }: { totalPoints: number }) {
       <div className="bg-gray-100 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Total Point</h3>
         <div className="flex items-center">
-          <Image src={require("@/assets/rise-coin.png")} alt="Coin" width={24} height={24} className="w-6 h-6 mr-2" />
+          {/* Use the imported image for the coin */}
+          <Image src={riseCoin} alt="Coin" width={24} height={24} className="w-6 h-6 mr-2" />
           <span className="text-2xl font-bold">{totalPoints} SP</span>
         </div>
       </div>
@@ -44,7 +50,7 @@ export default function MainScreen({ totalPoints }: { totalPoints: number }) {
           <div>
             <p className="text-sm text-gray-500">Total Point</p>
             <div className="flex items-center">
-              <Image src={require("@/assets/rise-coin.png")} alt="Coin" width={16} height={16} className="w-4 h-4 mr-1" />
+              <Image src={riseCoin} alt="Coin" width={16} height={16} className="w-4 h-4 mr-1" />
               <span className="font-semibold">{totalPoints} SP</span>
             </div>
           </div>

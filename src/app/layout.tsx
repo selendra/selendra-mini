@@ -21,9 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={geistMono.className}>
-        <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
           {children}
-        </div>
       </body>
     </html>
   );

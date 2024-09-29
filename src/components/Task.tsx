@@ -1,4 +1,6 @@
-import { CheckCircle } from 'lucide-react'
+import React from 'react'
+import Image from 'next/image'
+import riseCoin from '@/assets/rise-coin.png'
 
 interface TaskProps {
   id: string
@@ -10,33 +12,36 @@ interface TaskProps {
   actionLabel?: string
 }
 
-export default function Task({
-  id,
+const Task: React.FC<TaskProps> = ({
   title,
   points,
   isCompleted,
   onComplete,
   isRepeatable = false,
   actionLabel = 'Complete'
-}: TaskProps) {
+}) => {
   return (
-    <div key={id} className="bg-white border border-gray-200 p-4 rounded-lg flex justify-between items-center">
+    <div className="bg-[#272a2f] p-4 rounded-lg flex justify-between items-center">
       <div>
-        <h3 className="font-semibold">{title}</h3>
-        <p className="text-sm text-gray-500">{points} Point</p>
+        <h3 className="text-white font-semibold mb-1">{title}</h3>
+        <div className="flex items-center">
+          <Image src={riseCoin} alt="Coin" width={16} height={16} className="w-4 h-4 mr-1" />
+          <span className="text-sm font-medium text-gray-300">{points} SP</span>
+        </div>
       </div>
-      {isCompleted ? (
-        <button className="bg-green-500 text-white font-semibold py-2 px-4 rounded-full text-sm" disabled>
-          {isRepeatable ? 'Complete' : <CheckCircle className="w-5 h-5" />}
-        </button>
-      ) : (
-        <button
-          className="bg-yellow-400 text-black font-semibold py-2 px-4 rounded-full text-sm"
-          onClick={onComplete}
-        >
-          {actionLabel}
-        </button>
-      )}
+      <button
+        onClick={onComplete}
+        disabled={isCompleted && !isRepeatable}
+        className={`px-4 py-2 rounded-full text-sm font-medium ${
+          isCompleted
+            ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
+            : 'bg-primary text-white hover:bg-primary-dark'
+        }`}
+      >
+        {isCompleted ? (isRepeatable ? actionLabel : 'Completed') : actionLabel}
+      </button>
     </div>
   )
 }
+
+export default Task

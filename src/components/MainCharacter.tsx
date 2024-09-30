@@ -30,8 +30,14 @@ const MainCharacter: React.FC<MainCharacterProps> = ({ onClick }) => {
         className="w-80 h-80 p-4 rounded-full circle-outer cursor-pointer transition-transform duration-100"
         onClick={handleClick}
       >
-        <div className="w-full h-full rounded-full circle-inner">
-          <img src={mainCharacter.src} alt="Main Character" className="w-full h-full" />
+        <div className="w-full h-full rounded-full circle-inner relative">
+          <Image 
+            src={mainCharacter.src} 
+            alt="Main Character" 
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
       </div>
     </div>

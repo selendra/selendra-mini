@@ -59,7 +59,7 @@ const App: React.FC = () => {
   return (
     <div className="bg-black flex justify-center">
       <div className="w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl">
-        <Header levelIndex={levelIndex} levelNames={levelNames} />
+        <Header />
         
         <div className="px-4">
           <div className="flex items-center justify-between space-x-4 mt-1">

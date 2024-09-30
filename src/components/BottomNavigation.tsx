@@ -6,6 +6,7 @@ import Friends from '@/icons/Friends';
 import Coins from '@/icons/Coins';
 import { useActivePath } from '@/hooks/useActivePath';
 import riseCoin from '@/assets/rise-coin.png';
+import Image from 'next/image';
 
 const BottomNavigation: React.FC = () => {
   
@@ -14,7 +15,7 @@ const BottomNavigation: React.FC = () => {
   return (
     <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs">
       <NavItem 
-        icon={<img src={binanceLogo.src} alt="Exchange" className="w-8 h-8 mx-auto" />} 
+        icon={<Image src={binanceLogo.src} alt="Exchange" width={32} height={32} className="w-8 h-8 mx-auto" />} 
         label="Exchange" 
         href="/"
         active={activePath === '/'} 
@@ -38,7 +39,7 @@ const BottomNavigation: React.FC = () => {
         active={activePath === '/earn'} 
       />
       <NavItem 
-        icon={<img src={riseCoin.src} alt="Airdrop" className="w-8 h-8 mx-auto" />} 
+        icon={<Image src={riseCoin.src} alt="Airdrop" width={32} height={32} className="w-8 h-8 mx-auto" />} 
         label="Airdrop" 
         href="/airdrop"
         active={activePath === '/airdrop'} 

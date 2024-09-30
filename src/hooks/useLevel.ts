@@ -1,7 +1,13 @@
 import { useState, useCallback } from 'react';
 import { levelMinPoints } from '@/constants/levels';
 
-export function useLevel(initialLevel: number) {
+interface UseLevelReturn {
+  levelIndex: number;
+  updateLevel: (points: number) => void;
+  setLevelIndex: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export function useLevel(initialLevel: number): UseLevelReturn {
   const [levelIndex, setLevelIndex] = useState(initialLevel);
 
   const updateLevel = useCallback((points: number) => {
@@ -13,5 +19,5 @@ export function useLevel(initialLevel: number) {
     }
   }, []);
 
-  return { levelIndex, updateLevel };
+  return { levelIndex, updateLevel, setLevelIndex };
 }

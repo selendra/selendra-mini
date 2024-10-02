@@ -50,7 +50,7 @@ export default function EarnScreen({ totalPoints, updatePoints }: { totalPoints:
         </div>
       </div>
 
-      <div className="flex-grow overflow-y-auto space-y-4 pb-20">
+      <div className="space-y-4 pb-20">
         <Task
           id="daily-check-in"
           title="Check in once a day"
@@ -58,14 +58,7 @@ export default function EarnScreen({ totalPoints, updatePoints }: { totalPoints:
           isCompleted={completedTasks.includes('daily-check-in')}
           onComplete={() => handleTaskCompletion('daily-check-in', 300)}
           isRepeatable={true}
-        />
-        <Task
-          id="invite-friends"
-          title="Invite friends to join Selendra Mini"
-          points={1000}
-          isCompleted={completedTasks.includes('invite-friends')}
-          onComplete={() => handleTaskCompletion('invite-friends', 1000)}
-          actionLabel="Invite"
+          instantComplete={true}
         />
         <Task
           id="introduce-sel"
@@ -73,20 +66,98 @@ export default function EarnScreen({ totalPoints, updatePoints }: { totalPoints:
           points={1000}
           isCompleted={completedTasks.includes('introduce-sel')}
           onComplete={() => handleTaskCompletion('introduce-sel', 1000)}
+          actionLabel="Start"
+          externalLink="https://www.selendra.org"
         />
         <Task
-          id="follow-kay"
-          title="Follow Kay's X account"
+          id="follow-selendra-x-account"
+          title="Follow Selendra's X Account"
           points={1000}
-          isCompleted={completedTasks.includes('follow-kay')}
-          onComplete={() => handleTaskCompletion('follow-kay', 1000)}
+          isCompleted={completedTasks.includes('follow-selendra-x-account')}
+          onComplete={() => handleTaskCompletion('follow-selendra-x-account', 1000)}
+          actionLabel="Follow"
+          externalLink="https://x.com/selendranetwork"
         />
         <Task
-          id="retweet-kay"
-          title={'Retweet "Kay x Lark Davis" on Kay\'s X'}
+          id="follow-stadiumx-x-account"
+          title="Follow StadiumX's X Account"
           points={1000}
-          isCompleted={completedTasks.includes('retweet-kay')}
-          onComplete={() => handleTaskCompletion('retweet-kay', 1000)}
+          isCompleted={completedTasks.includes('follow-stadiumx-x-account')}
+          onComplete={() => handleTaskCompletion('follow-stadiumx-x-account', 1000)}
+          actionLabel="Follow"
+          externalLink="https://x.com/stadiumxasia"
+        />
+        <Task
+          id="join-selendra-telegram-channel"
+          title="Join Selendra's Telegram Channel"
+          points={1000}
+          isCompleted={completedTasks.includes('join-selendra-telegram-channel')}
+          onComplete={() => handleTaskCompletion('join-selendra-telegram-channel', 1000)}
+          actionLabel="Join"
+          externalLink="https://t.me/selendranetwork"
+        />
+        <Task
+          id="join-stadiumx-telegram-channel"
+          title="Join StadiumX's Telegram Channel"
+          points={1000}
+          isCompleted={completedTasks.includes('join-stadiumx-telegram-channel')}
+          onComplete={() => handleTaskCompletion('join-stadiumx-telegram-channel', 1000)}
+          actionLabel="Join"
+          externalLink="https://t.me/stadiumxasia"
+        />
+        <Task
+          id="join-stadiumx-telegram-channel"
+          title="Join StadiumX's Telegram Channel"
+          points={1000}
+          isCompleted={completedTasks.includes('join-stadiumx-telegram-channel')}
+          onComplete={() => handleTaskCompletion('join-stadiumx-telegram-channel', 1000)}
+          actionLabel="Join"
+          externalLink="https://t.me/stadiumxasia"
+        />
+        <Task
+          id="join-isi-telegram-channel"
+          title="Join ISIDSCFC's Telegram Channel"
+          points={1000}
+          isCompleted={completedTasks.includes('join-isi-telegram-channel')}
+          onComplete={() => handleTaskCompletion('join-isi-telegram-channel', 1000)}
+          actionLabel="Join"
+          externalLink="https://t.me/+SMp99gsREh5hYTVl"
+        />
+        <Task
+          id="join-mifa-telegram-channel"
+          title="Join MIFA's Telegram Channel"
+          points={1000}
+          isCompleted={completedTasks.includes('join-mifa-telegram-channel')}
+          onComplete={() => handleTaskCompletion('join-mifa-telegram-channel', 1000)}
+          actionLabel="Join"
+          externalLink="https://t.me/Mifacambodia"
+        />
+        <Task
+          id="visit-isi-website"
+          title="Visit ISI DSC FC Website"
+          points={1000}
+          isCompleted={completedTasks.includes('visit-isi-website')}
+          onComplete={() => handleTaskCompletion('visit-isi-website', 1000)}
+          actionLabel="Visit"
+          externalLink="https://dangkorsenchey.com/kh"
+        />
+        <Task
+          id="visit-mifa-website"
+          title="Visit MIFA Website"
+          points={1000}
+          isCompleted={completedTasks.includes('visit-mifa-website')}
+          onComplete={() => handleTaskCompletion('visit-mifa-website', 1000)}
+          actionLabel="Visit"
+          externalLink="https://mifa.stadiumx.org/kh"
+        />
+        <Task
+          id="visit-ppcfc-website"
+          title="Visit PPCFC Website"
+          points={1000}
+          isCompleted={completedTasks.includes('visit-ppcfc-website')}
+          onComplete={() => handleTaskCompletion('visit-ppcfc-website', 1000)}
+          actionLabel="Visit"
+          externalLink="https://ppcfc.com/kh"
         />
       </div>
     </motion.div>

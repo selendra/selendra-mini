@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import riseCoin from '@/assets/rise-coin.png'
 
@@ -10,16 +10,50 @@ interface TaskProps {
   onComplete: () => void
   isRepeatable?: boolean
   actionLabel?: string
+  externalLink?: string // External link for tasks that require going outside the app
+  instantComplete?: boolean // New prop to instantly complete task
 }
 
 const Task: React.FC<TaskProps> = ({
+  id,
   title,
   points,
   isCompleted,
   onComplete,
   isRepeatable = false,
-  actionLabel = 'Complete'
+  actionLabel = 'Complete',
+  externalLink,
+  instantComplete = false // Defaults to false, meaning task will wait for external link actions
 }) => {
+  const [loading, setLoading] = useState(false)
+
+  const handleTaskClick = async () => {
+    if (loading || (isCompleted && !isRepeatable)) {
+      return
+    }
+
+    // Handle instant completion
+    if (instantComplete) {
+      onComplete() // Call parent to mark task as complete
+      return
+    }
+
+    if (externalLink) {
+      // Open external link in a new tab
+      window.open(externalLink, '_blank')
+
+      // Simulate waiting for user action
+      setLoading(true)
+      await new Promise((resolve) => setTimeout(resolve, 6000)) // Simulate a delay for completion
+      setLoading(false)
+
+      // Complete the task after delay
+      onComplete()
+    } else {
+      onComplete() // Complete directly if no external link
+    }
+  }
+
   return (
     <div className="bg-[#272a2f] p-4 rounded-lg flex justify-between items-center">
       <div>
@@ -30,15 +64,19 @@ const Task: React.FC<TaskProps> = ({
         </div>
       </div>
       <button
-        onClick={onComplete}
-        disabled={isCompleted && !isRepeatable}
-        className={`px-4 py-2 rounded-full text-sm font-medium ${
-          isCompleted
+        onClick={handleTaskClick}
+        disabled={loading || (isCompleted && !isRepeatable)}
+        className={`px-4 py-2 rounded-full text-sm font-medium flex items-center justify-center ${
+          loading || (isCompleted && !isRepeatable)
             ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
             : 'bg-primary text-white hover:bg-primary-dark'
         }`}
       >
-        {isCompleted ? (isRepeatable ? actionLabel : 'Completed') : actionLabel}
+        {loading ? (
+          <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-white"></div>
+        ) : (
+          isCompleted ? (isRepeatable ? actionLabel : 'Completed') : actionLabel
+        )}
       </button>
     </div>
   )

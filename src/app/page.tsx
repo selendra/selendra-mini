@@ -16,6 +16,7 @@ import MainCharacter from '@/components/MainCharacter';
 import PointsDisplay from '@/components/PointsDisplay';
 import ProfitDisplay from '@/components/ProfitDisplay';
 import { getUserData, updateUserPoints, updateUserLevel, updateDailyTasks, IUser } from '@/api/userApi';
+import { toast, Toaster } from 'react-hot-toast';
 
 const App: React.FC = () => {
   const [clicks, setClicks] = useState<{ id: number; x: number; y: number }[]>([]);
@@ -45,7 +46,8 @@ const App: React.FC = () => {
       await updateUserPoints(username, amount);
     } catch (error) {
       console.error('Failed to update points in database:', error);
-      addPoints(-amount);
+      addPoints(-amount); // Rollback points if an error occurs
+      toast.error('Failed to update points!'); // Only show error toasts
     }
   }, [username, addPoints]);
 
@@ -65,7 +67,6 @@ const App: React.FC = () => {
       setPoints(userData.points);
       setLevelIndex(userData.level);
       setProfitPerHour(userData.profitPerHour);
-      // Update daily tasks timers based on userData.lastDailyReward, etc.
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -84,10 +85,6 @@ const App: React.FC = () => {
     updateLevel(points);
   }, [points, updateLevel]);
 
-  useInterval(() => {
-    const pointsPerSecond = Math.floor(profitPerHour / 3600);
-    handleAddPoints(pointsPerSecond);
-  }, 1000);
 
   const handleCardClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const pointsToAdd = 11;

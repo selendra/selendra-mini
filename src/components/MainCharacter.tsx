@@ -1,26 +1,34 @@
-import React, { useCallback, useRef } from 'react';
-import mainCharacter from '@/assets/characters/16.webp';
+import React, { useRef, useCallback } from 'react';
 import Image from 'next/image';
+import mainCharacter from '@/assets/characters/16.webp';
 
 interface MainCharacterProps {
-  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClick: (e: React.TouchEvent<HTMLDivElement>) => void;
 }
 
 const MainCharacter: React.FC<MainCharacterProps> = ({ onClick }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleTouch = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     if (cardRef.current) {
       const card = cardRef.current;
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      card.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg)`;
-      setTimeout(() => {
-        card.style.transform = '';
-      }, 100);
+
+      // Handle multiple touches
+      for (let i = 0; i < e.touches.length; i++) {
+        const touch = e.touches[i];
+        const x = touch.clientX - rect.left - rect.width / 2;
+        const y = touch.clientY - rect.top - rect.height / 2;
+
+        card.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg)`;
+
+        // Reset the transformation after a short delay
+        setTimeout(() => {
+          card.style.transform = '';
+        }, 100);
+      }
     }
-    onClick(e);
+    onClick(e); // Trigger the onClick event to add points
   }, [onClick]);
 
   return (
@@ -28,7 +36,7 @@ const MainCharacter: React.FC<MainCharacterProps> = ({ onClick }) => {
       <div
         ref={cardRef}
         className="w-80 h-80 p-4 rounded-full circle-outer cursor-pointer transition-transform duration-100"
-        onClick={handleClick}
+        onTouchStart={handleTouch} // Handle touch events
       >
         <div className="w-full h-full rounded-full circle-inner relative">
           <Image 

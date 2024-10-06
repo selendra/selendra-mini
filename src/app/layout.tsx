@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import BottomNavigation from "@/components/BottomNavigation";
 
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",

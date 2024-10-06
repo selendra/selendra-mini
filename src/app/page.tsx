@@ -24,7 +24,6 @@ const App: React.FC = () => {
   const { levelIndex, updateLevel, setLevelIndex } = useLevel(0);
   const [profitPerHour, setProfitPerHour] = useState(0);
   const [username, setUsername] = useState('player1');
-  const [isLoading, setIsLoading] = useState(true);
 
   const [dailyTasks, setDailyTasks] = useState({
     dailyRewardTimeLeft: "",
@@ -61,16 +60,13 @@ const App: React.FC = () => {
   }, [username, setLevelIndex]);
 
   const fetchUserData = useCallback(async () => {
-    setIsLoading(true);
     try {
       const userData: IUser = await getUserData(username);
       setPoints(userData.points);
       setLevelIndex(userData.level);
       setProfitPerHour(userData.profitPerHour);
-      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching user data:', error);
-      setIsLoading(false);
     }
   }, [username, setPoints, setLevelIndex]);
 
@@ -86,10 +82,20 @@ const App: React.FC = () => {
   }, [points, updateLevel]);
 
 
-  const handleCardClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleCardClick = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     const pointsToAdd = 11;
-    handleAddPoints(pointsToAdd);
-    setClicks(prev => [...prev, { id: Date.now(), x: e.pageX, y: e.pageY }]);
+  
+    // Handle multiple touches
+    for (let i = 0; i < e.touches.length; i++) {
+      const touch = e.touches[i];
+      handleAddPoints(pointsToAdd);
+  
+      // Capture the touch point and add to the clicks array
+      setClicks(prev => [
+        ...prev, 
+        { id: Date.now(), x: touch.pageX, y: touch.pageY }
+      ]);
+    }
   }, [handleAddPoints]);
 
   const handleAnimationEnd = useCallback((id: number) => {
@@ -104,10 +110,6 @@ const App: React.FC = () => {
       levelMinPoints={levelMinPoints}
     />
   ), [levelIndex, points]);
-
-  if (isLoading) {
-    return <div className="flex items-center justify-center h-screen bg-black text-white">Loading...</div>;
-  }
 
   return (
     <div className="bg-black flex justify-center">
